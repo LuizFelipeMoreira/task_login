@@ -1,14 +1,14 @@
 import express from 'express';
-import UserController from './user-controller';
+import AuthController from './auth-controller';
 import { userSchema } from '../../validations/auth-schemas';
 import { validateRequest } from '../../middlewares/ValidateRequest';
 
 const router = express.Router();
 
-router.post('/signup', validateRequest(userSchema), UserController.signup);
+router.post('/signup', validateRequest(userSchema), AuthController.signup);
 
-router.post('/login', UserController.login);
+router.post('/login', AuthController.login);
 
-router.post('/logout', UserController.logout);
+router.post('/logout', AuthController.logout);
 
 export default router;

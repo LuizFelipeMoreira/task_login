@@ -1,5 +1,5 @@
 import express from 'express';
-import routes from './controllers/user/user.routes';
+import routes from './controllers/auth/user.routes';
 
 export const app = express();
 

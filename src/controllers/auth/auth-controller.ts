@@ -3,7 +3,7 @@ import { RegisterUserUseCase } from '../../use-cases/auth/register-user';
 import { LoginUserUseCase } from '../../use-cases/auth/login-user ';
 import PrismaUserRepository from '../../repositories/prisma/prisma-user-repository';
 
-class UserController {
+class AuthController {
     public async signup(req: Request, res: Response): Promise<any> {
         const { name, email, password } = req.body;
 
@@ -57,4 +57,4 @@ class UserController {
     }
 }
 
-export default new UserController();
+export default new AuthController();

@@ -1,6 +1,8 @@
 import { Prisma, User } from '@prisma/client';
 import { UserRepository } from '../../repositories/user-repositories';
 import bcrypt from 'bcrypt';
+import { z } from 'zod';
+import { loginSchema } from '../../validations/auth-schemas';
 
 interface LoginRequest {
     email: string;

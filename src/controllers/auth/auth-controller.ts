@@ -1,10 +1,15 @@
 import { Request, Response } from 'express';
 import { RegisterUserUseCase } from '../../use-cases/auth/register-user';
 import { LoginUserUseCase } from '../../use-cases/auth/login-user ';
+import { Controller, Post, Req, Res } from 'routing-controllers';
 import PrismaUserRepository from '../../repositories/prisma/prisma-user-repository';
 
-class AuthController {
-    public async signup(req: Request, res: Response): Promise<any> {
+@Controller('/auth')
+export class AuthController {
+    constructor() {}
+
+    @Post('/signup')
+    public async signup(@Req() req: Request, @Res() res: Response) {
         const { name, email, password } = req.body;
 
         if (!name || !email || !password) {
@@ -30,7 +35,8 @@ class AuthController {
         }
     }
 
-    public async login(req: Request, res: Response): Promise<any> {
+    @Post('/login')
+    public async login(@Req() req: Request, @Res() res: Response) {
         const { email, password } = req.body;
 
         try {
@@ -52,9 +58,8 @@ class AuthController {
         }
     }
 
-    public async logout(req: Request, res: Response): Promise<any> {
+    @Post('logout')
+    public async logout(@Req() req: Request, @Res() res: Response) {
         return res.status(200).json({ message: 'So um teste de logout' });
     }
 }
-
-export default new AuthController();

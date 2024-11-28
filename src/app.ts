@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import routes from './controllers/auth/user.routes';
 import { ErrorHandling } from './middlewares/ErrorMiddleware';
 import { useExpressServer } from 'routing-controllers';
-import { AuthController } from './controllers/auth/auth-controller';
+import { AuthController } from './controllers/auth-controller';
 
 export const app = express();
 

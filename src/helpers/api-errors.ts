@@ -7,8 +7,8 @@ export class ApiError extends Error {
     }
 }
 
-export class NotNumber extends ApiError {
-    constructor() {
-        super();
+export class UserNotExist extends ApiError {
+    constructor(message: string) {
+        super(message, 400);
     }
 }

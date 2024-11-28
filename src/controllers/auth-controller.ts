@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
-import { RegisterUserUseCase } from '../../use-cases/auth/register-user';
-import { LoginUserUseCase } from '../../use-cases/auth/login-user ';
+import { RegisterUserUseCase } from '../use-cases/auth/register-user';
+import { LoginUserUseCase } from '../use-cases/auth/login-user ';
 import { Controller, Post, Req, Res } from 'routing-controllers';
-import PrismaUserRepository from '../../repositories/prisma/prisma-user-repository';
+import PrismaUserRepository from '../repositories/prisma/prisma-user-repository';
+import jwt from 'jsonwebtoken';
 
 @Controller('/auth')
 export class AuthController {

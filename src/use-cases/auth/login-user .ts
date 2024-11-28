@@ -1,8 +1,7 @@
 import { Prisma, User } from '@prisma/client';
 import { UserRepository } from '../../repositories/user-repositories';
 import bcrypt from 'bcrypt';
-import { z } from 'zod';
-import { loginSchema } from '../../validations/auth-schemas';
+import { UserNotExist } from '../../helpers/api-errors';
 
 interface LoginRequest {
     email: string;
@@ -16,7 +15,7 @@ class LoginUserUseCase {
         const user = await this.prismaUserRepository.getUserByEmail(email);
 
         if (!user) {
-            throw new Error('Usuario nao encontrado');
+            throw new UserNotExist('Usuario nao encontrado');
         }
 
         const decodedPassword = await bcrypt.compare(password, user.password);

@@ -1,17 +1,19 @@
+import { Prisma } from '@prisma/client';
 import { Request, Response } from 'express';
-import { RegisterUserUseCase } from '../use-cases/auth/register-user';
-import { LoginUserUseCase } from '../use-cases/auth/login-user ';
-import { Controller, Post, Req, Res } from 'routing-controllers';
+import { Body, Controller, Post, Req, Res } from 'routing-controllers';
 import PrismaUserRepository from '../repositories/prisma/prisma-user-repository';
-import jwt from 'jsonwebtoken';
+import { LoginUserUseCase } from '../use-cases/auth/login-user ';
+import { RegisterUserUseCase } from '../use-cases/auth/register-user';
+
+type UserResponse = Prisma.UserCreateInput;
 
 @Controller('/auth')
 export class AuthController {
     constructor() {}
 
     @Post('/signup')
-    public async signup(@Req() req: Request, @Res() res: Response) {
-        const { name, email, password } = req.body;
+    public async signup(@Body() body: UserResponse, @Res() res: Response) {
+        const { name, email, password } = body;
 
         if (!name || !email || !password) {
             return res.status(400).json({ message: 'Preencha todos os campos' });
@@ -37,8 +39,8 @@ export class AuthController {
     }
 
     @Post('/login')
-    public async login(@Req() req: Request, @Res() res: Response) {
-        const { email, password } = req.body;
+    public async login(@Body() body: UserResponse, @Res() res: Response) {
+        const { email, password } = body;
 
         try {
             const loginUserUseCase = new LoginUserUseCase(PrismaUserRepository);

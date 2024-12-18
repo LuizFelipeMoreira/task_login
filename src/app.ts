@@ -1,9 +1,8 @@
 import express from 'express';
 import 'reflect-metadata';
-import routes from './controllers/auth/user.routes';
-import { ErrorHandling } from './middlewares/ErrorMiddleware';
 import { useExpressServer } from 'routing-controllers';
 import { AuthController } from './controllers/auth-controller';
+import { ErrorHandling } from './middlewares/ErrorMiddleware';
 
 export const app = express();
 
@@ -13,8 +12,6 @@ app.use(express.json());
 useExpressServer(app, {
     controllers: [AuthController],
 });
-
-//app.use('/', routes);
 
 app.use(ErrorHandling);
 

@@ -12,3 +12,9 @@ export class UserNotExist extends ApiError {
         super(message, 400);
     }
 }
+
+export class UserInvalid extends ApiError {
+    constructor(message: string) {
+        super(message, 201);
+    }
+}
